@@ -1,0 +1,185 @@
+.inputClass {
+    width: 300px;
+    height: 60px;
+    border-style: solid;
+    border-color: gray;
+    background-color: transparent;
+    border-radius: 8px;
+    font-family: Bahnschrift;
+    font-feature-settings: "smcp", "zero";
+    font-weight: 300;
+    font-size: 23px;
+    padding-left: 15px;
+    margin: 10px;
+}
+button {
+    width: 80px;
+    height: 30px;
+    margin: 10px;
+    border-style: solid;
+    border-color: gray;
+    background-color: gainsboro;
+    border-radius: 8px;
+}
+.alertClass {
+    border-style: solid;
+    border-radius: 5px;
+    border-color: transparent;
+    background-color: transparent;
+    width: 300px;
+    height: content-box;
+    font-feature-settings: "smcp", "zero";
+    font-family: Bahnschrift;
+    color: #72564d;
+    text-align: center;
+    horiz-align: center;
+    margin-left: 19px;
+}
+
+.profile {
+    horiz-align: center;
+    background-color: wheat;
+    width: border-box;
+    min-height: 720px;
+    height: fit-content;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 30px
+}
+.textStyle {
+    font-weight: 500;
+    color: #72564d;
+    font-family: Bahnschrift;
+    font-feature-settings: "smcp", "zero";
+}
+
+.userResult {
+    background-color: transparent;
+    border-style: solid;
+    border-color: gray;
+    border-radius: 10px;
+    border-width: 2px;
+    width: fit-content;
+}
+
+.task {
+    background-color: transparent;
+    border-style: solid;
+    border-color: #72564d;
+    border-radius: 10px;
+    border-width: 2px;
+    width: 320px;
+    height: 450px;
+    font-family: Bahnschrift;
+    font-feature-settings: "smcp", "zero";
+    font-weight: 500;
+    color: #72564d;
+    display: inline-block;
+    margin: 15px;
+    hyphens: manual;
+    -webkit-hyphens: manual;
+    -ms-hyphens: manual;
+    -moz-hyphens: manual;
+    word-break: break-word;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.taskHeader {
+    background-color: #72564d;
+    border-style: solid;
+    border-color: transparent;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 50px;
+    color: wheat;
+}
+
+.buttonClass {
+    background-color: #72564d;
+    border-style: solid;
+    border-color: transparent;
+    border-radius: 6px;
+    height: 35px;
+    color: wheat;
+    font-family: Bahnschrift;
+    font-feature-settings: "smcp", "zero";
+    font-weight: 500;
+
+}
+
+.buttonClass:hover{
+    background-color: #9a7866;
+}
+
+.pencil{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+
+    opacity: 0.3;
+}
+
+.pencil:hover{
+    opacity: 1;
+}
+.pencil::after {
+     content: '';
+     width: 5px ;
+     height: 17px ;
+     background: wheat;
+     left: 8px;
+     border-bottom-left-radius: 70%;
+     border-bottom-right-radius: 70%;
+ }
+.pencil:before, .pencil:after{
+    position:absolute;
+    transform: rotate(30deg);
+
+}
+.pencil::before {
+    content: "" ;
+    position: absolute ;
+    width: 5px ;
+    height: 5px ;
+    background: wheat;
+    top: -6px ;
+    left: 15px;
+}
+/*.pencil::after {
+    content: "" ;
+    position: absolute ;
+    width: 3px ;
+    height: 3px ;
+    background: wheat ;
+    left: 1px ;
+    bottom: -2px ;
+    transform: rotate(45deg);
+}*/
+
+.close {
+    position: absolute;
+    right: 32px;
+    width: 20px;
+    height: 20px;
+    opacity: 0.3;
+}
+.close:hover {
+    opacity: 1;
+}
+.close:before, .close:after {
+    position: absolute;
+    left: 9px;
+    top: 0;
+    content: '';
+    height: 20px;
+    width: 2px;
+    background-color: wheat;
+}
+.close:before {
+    transform: rotate(45deg);
+}
+.close:after {
+    transform: rotate(-45deg);
+}
+

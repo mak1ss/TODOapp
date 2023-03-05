@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Administration page</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<header>
+    <div style="border-radius: unset; min-height: 110px; border-bottom-style: dashed; border-bottom-width: 5px; border-bottom-color: darkgray; background-color: gray"
+         class="profile">
+        <h1 style="text-align: center" class="textStyle">Hello administrator!</h1>
+        <div style="text-align: right; position: relative">
+            <form method="get" action="/user/">
+                <button style="width: fit-content" type="submit">Home page</button>
+            </form>
+        </div>
+    </div>
+
+</header>
+<body>
+<div class="profile" style="border-radius: unset; height: 850px; background-color: #dbd9c3">
+    <div style="height: fit-content; margin-left: unset; width: fit-content">
+        <div th:if="${not_found != null}" style="background-color: lightcoral; width: 320px; padding-left: unset"
+             class="alertClass">
+            <label th:text="${'No user was found with name: ' + not_found}"></label>
+        </div>
+        <div style="margin-top: 5px; margin-right: 0; width: 320px; height: 90px; padding: unset"
+             class="alertClass">
+            <label style="top: 5px; color: #544646">Find users by name</label>
+            <form method="get" th:action="@{/user/admin/get}">
+                <input style="margin: unset; border-color: #544646" class="inputClass" type="text" name="username" placeholder="Username"
+                       th:modelAttribute="${username}">
+                <button class="buttonClass" style="margin-left: unset; width: 320px; position: relative; background-color: #544646" type="submit">Search user</button>
+            </form>
+        </div>
+
+        <table th:if="${search_result != null}" class="userResult"
+               style="position: absolute; margin-left: 25%; top: 132px; text-align: center">
+            <tr>
+                <th colspan="4" class="textStyle" style="font-size: large; text-align: center">Search result</th>
+            </tr>
+            <tr>
+                <th class="textStyle" style="font-size: medium">Id</th>
+                <th class="textStyle" style="font-size: medium">Name</th>
+                <th class="textStyle" style="font-size: medium">Status</th>
+                <th class="textStyle" style="font-size: medium">Tasks amount</th>
+                <th class="textStyle" style="font-size: medium; text-align: center">Roles</th>
+            <tr th:each="tmp : ${search_result}">
+                <td th:text="${tmp.id}" class="textStyle" style="font-size: small"></td>
+                <td th:text="${tmp.name}" class="textStyle" style="font-size: small"></td>
+                <td th:text="${tmp.status}" class="textStyle" style="font-size: small"></td>
+                <td th:text="${tmp.tasks.size()}" class="textStyle" style="font-size: small"></td>
+                <td th:text="${tmp.role}" class="textStyle" style="font-size: small"></td>
+            </tr>
+        </table>
+    </div>
+    <div style="margin-top: 50px; height: fit-content; margin-left: unset; width: fit-content">
+        <div th:if="${success_delete != null}" style="background-color: olivedrab; width: 320px; padding-left: unset"
+             class="alertClass">
+            <label>Successfully deleted</label>
+        </div>
+        <div th:if="${error != null}" style="background-color: lightcoral; width: 320px; padding-left: unset"
+             class="alertClass">
+            <label th:text="${'No user was found with id: ' + error}"></label>
+        </div>
+        <div style="margin-top: 5px; margin-right: 0; width: 320px; height: 90px;  padding: unset"
+             class="alertClass">
+            <label style="top: 5px; color: #544646">Delete user by id</label>
+            <form th:method="delete" th:action="@{/user/admin/delete}">
+                <input style="margin: unset; border-color: #544646" class="inputClass" type="text" name="userId" placeholder="User id">
+                <button class="buttonClass" style="margin-left: unset; width: 320px; position: relative;background-color: #544646" type="submit">Delete user</button>
+            </form>
+        </div>
+    </div>
+    <table class="userResult"
+           style="position: absolute; margin-left: 49%; top: 132px; text-align: center">
+        <tr>
+            <th colspan="4" class="textStyle" style="font-size: large; text-align: center">Admin List</th>
+        </tr>
+        <tr>
+            <th class="textStyle" style="font-size: medium">Id</th>
+            <th class="textStyle" style="font-size: medium">Name</th>
+            <th class="textStyle" style="font-size: medium">Status</th>
+            <th class="textStyle" style="font-size: medium">Roles</th>
+        <tr th:each="tmp : ${adminList}">
+            <td th:text="${tmp.id}" class="textStyle" style="font-size: small"></td>
+            <td th:text="${tmp.name}" class="textStyle" style="font-size: small"></td>
+            <td th:text="${tmp.status}" class="textStyle" style="font-size: small"></td>
+            <td th:text=" ${tmp.role}" class="textStyle" style="font-size: small"></td>
+        </tr>
+    </table>
+    <table class="userResult" style="position: absolute; margin-left: 70%; top: 132px;  text-align: center">
+        <tr>
+            <th colspan="4" class="textStyle" style="font-size: xxx-large">All users</th>
+        </tr>
+        <tr>
+            <th class="textStyle" style="font-size: xx-large">Id</th>
+            <th class="textStyle" style="font-size: xx-large">Name</th>
+            <th class="textStyle" style="font-size: xx-large">Status</th>
+            <th class="textStyle" style="font-size: xx-large">Tasks amount</th>
+        </tr>
+        <tr th:each="tmp : ${allUsers}">
+            <td th:text="${tmp.id}" class="textStyle" style="font-size: large"></td>
+            <td th:text="${tmp.name}" class="textStyle" style="font-size: large"></td>
+            <td th:text="${tmp.status}" class="textStyle" style="font-size: large"></td>
+            <td th:text="${tmp.tasks.size()}" class="textStyle" style="font-size: large"></td>
+        </tr>
+    </table>
+</div>
+</body>
+</html>

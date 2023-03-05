@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>New Task</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<header>
+    <div class="profile" style="border-radius: unset; min-height: 110px; background-color: #b17a65; text-align: center">
+        <a href="/" class="textStyle"
+           style="color: #794219; position: absolute; top: 5%; right: 47%; font-size: x-large">TODOapp</a>
+        <div style="text-align: right">
+            <form method="post" action="/user/logout" th:action="@{/user/logout}">
+                <button class="buttonClass" style="width: fit-content" type="submit">Log out</button>
+            </form>
+            <form method="get" action="/user/">
+                <button class="buttonClass" style="width: fit-content; " type="submit">Home page</button>
+            </form>
+        </div>
+    </div>
+</header>
+<body>
+<div class="profile" style="text-align: center; height: 757px; padding: 20px; border-radius: unset">
+    <div th:if="${not_unique != null}"
+         style="display: block; margin-left:auto; margin-right: auto; background-color: lightcoral; color: wheat; width: 320px; padding-left: unset"
+         class="alertClass">
+        <label>Task with such a name is already exist</label>
+    </div>
+    <form method="post" th:action="@{/tasks/new}">
+        <div style="display: block;margin-left: auto; margin-right: auto; width: 460px" class="task">
+
+            <input style="width: 400px; font-size: 30px; color: #72564d; border-style: solid;border-color: transparent; border-bottom-color: #72564d; border-bottom-width: 2px; border-bottom-left-radius: 3px; border-bottom-right-radius: 3px; background-color: transparent; height: 50px;"
+                   type="text" name="taskName" placeholder="Name of task" th:modelAttribute="${taskName}" required
+                   autofocus>
+            <textarea class="textStyle"
+                      style=" font-size: larger; height: 330px; width: 400px; border-color: transparent; background-color: transparent; "
+                      name="task" placeholder="Content of your task" th:modelAttribute="${task}" required></textarea>
+        </div>
+        <button class="buttonClass" style="width: 400px; height: 40px">Submit</button>
+    </form>
+
+</div>
+</body>
+</html>

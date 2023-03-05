@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Welcome to TodoApp</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<header>
+    <div sec:authorize="hasRole('ROLE_USER')" class="profile"
+         style="border-radius: unset; min-height: 110px; background-color: #b17a65; text-align: center">
+        <div style="text-align: center">
+            <h1 class="textStyle" style="color: wheat; font-weight: 900" th:text="${'Welcome to TodoApp ' + #authentication.name}">!</h1>
+        </div>
+        <div style="position: absolute; top: 10px; margin-left: 92%; right: 10px; text-align: right">
+            <form method="post" action="/user/logout" th:action="@{/user/logout}">
+                <button class="buttonClass" style="width: fit-content" type="submit">Log out</button>
+            </form>
+            <form method="get" action="/user/">
+                <button class="buttonClass" style="width: fit-content; " type="submit">Home page</button>
+            </form>
+        </div>
+    </div>
+</header>
+<body>
+<div class="profile"
+     style="height: fit-content; min-height: 750px; padding: 20px; border-radius: unset; text-align: center">
+    <div style="font-size: 30px">
+        <h2 class="textStyle">Hello!</h2>
+        <p class="textStyle">Here you can create new tasks and challenges</p>
+        <p class="textStyle">Furthermore, you can try to find your friend here and try together to solve your TODO
+            list</p>
+        <h3 class="textStyle">Enjoy!</h3>
+    </div>
+    <div sec:authorize="anonymous">
+        <form method="get" action="/user/registration" th:action="@{/user/registration}">
+            <button class="buttonClass" type="submit">Sign Up</button>
+        </form>
+        <form method="get" action="/user/login" th:action="@{/user/login}">
+            <button class="buttonClass" type="submit">Log In</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>

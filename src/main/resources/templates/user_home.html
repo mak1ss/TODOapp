@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<header>
+    <div class="profile" style="border-radius: unset;height: fit-content; min-height: 110px; background-color: #b17a65">
+        <div style="text-align: right; margin-top: unset">
+            <a href="/" class="textStyle"
+               style="color: #794219; position: absolute; top: 5%; right: 47.5%; font-size: x-large">TODOapp</a>
+            <form method="post" action="/user/logout" th:action="@{/user/logout}">
+                <button class="buttonClass" style="width: max-content; right: 0" type="submit">Log out</button>
+            </form>
+            <form method="get" action="/user/profile" th:action="@{/user/profile}">
+                <button class="buttonClass" style="margin-top: unset; width: max-content" type="submit">Profile
+                    settings
+                </button>
+            </form>
+            <form sec:authorize="hasAuthority('ROLE_ADMIN')" method="get" action="/user/admin"
+                  th:action="@{/user/admin}">
+                <button class="buttonClass" style="margin-top: unset; width: max-content" type="submit">Administration
+                </button>
+            </form>
+        </div>
+        <h1 class="textStyle" style="position: absolute; top: 40px; left: 50px; color: wheat;"
+            th:text="${'Hello ' + #authentication.name}"></h1>
+    </div>
+</header>
+<body>
+<div class="profile" style="align-content: center; padding: 20px; border-radius: unset;">
+    <div style="margin: 20px; text-align: right">
+        <div th:if="${not_found != null}" style="background-color: lightcoral; width: 320px; padding-left: unset"
+             class="alertClass">
+            <label th:text="${'No user was found with name: ' + not_found}"></label>
+        </div>
+        <div>
+            <div style="margin-top: 5px; margin-right: 0px; width: 320px; height: 90px; background-color: transparent; padding: unset"
+                 class="alertClass">
+                <label style="top: 5px; color: #72564d">Find users by name</label>
+                <form method="get" th:action="@{/user/search}">
+                    <input style="margin: unset; color: #72564d; border-color: #72564d" class="inputClass" type="text"
+                           name="username" placeholder="Username"
+                           th:modelAttribute="${username}">
+                    <button class="buttonClass" style="margin-left: unset; width: 320px; position: relative"
+                            type="submit">Search user
+                    </button>
+                </form>
+            </div>
+
+            <table th:if="${search_result != null}" class="userResult"
+                   style="position: absolute; margin-left: 25%; top: 180px ; text-align: center">
+                <tr>
+                    <th colspan="4" class="textStyle" style="font-size: large; text-align: center">Search result</th>
+                </tr>
+                <tr>
+                    <th class="textStyle" style="font-size: medium">Id</th>
+                    <th class="textStyle" style="font-size: medium">Name</th>
+                    <th class="textStyle" style="font-size: medium">Status</th>
+                    <th class="textStyle" style="font-size: medium">Tasks amount</th>
+                    <th class="textStyle" style="font-size: medium; text-align: center">Roles</th>
+                <tr th:each="tmp : ${search_result}">
+                    <td th:text="${tmp.id}" class="textStyle" style="font-size: small"></td>
+                    <td th:text="${tmp.name}" class="textStyle" style="font-size: small"></td>
+                    <td th:text="${tmp.status}" class="textStyle" style="font-size: small"></td>
+                    <td th:text="${tmp.tasks.size()}" class="textStyle" style="font-size: small"></td>
+                    <td th:text="${tmp.role}" class="textStyle" style="font-size: small"></td>
+                </tr>
+            </table>
+            <div style="position: static; margin: 20px; text-align: right;">
+                <form method="get" th:action="@{/tasks/}">
+                    <button style="width: 200px" class="buttonClass" type="submit">My tasks</button>
+                </form>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${#authentication.name + ' profile'}"></title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<header>
+    <div class="profile" style="border-radius: unset; min-height: 110px; background-color: #b17a65; text-align: center">
+        <a href="/" class="textStyle"
+           style="color: #794219; position: absolute; top: 5%; right: 47.5%; font-size: x-large">TODOapp</a>
+        <div style="text-align: right">
+            <form method="post" action="/user/logout" th:action="@{/user/logout}">
+                <button class="buttonClass" style="width: fit-content" type="submit">Log out</button>
+            </form>
+            <form method="get" action="/user/">
+                <button class="buttonClass" style="width: fit-content; " type="submit">Home page</button>
+            </form>
+        </div>
+    </div>
+</header>
+<body>
+<div class="profile" style="height: fit-content; min-height: 750px; padding: 20px; border-radius: unset">
+    <div class="textStyle" style="padding: 20px">
+        <div th:if="${error != null}"
+             style="display: block; margin-left:auto; margin-right: auto; background-color: lightcoral; color: wheat; width: 320px; padding-left: unset" class="alertClass" >
+            <label>User with such name is already exist</label>
+        </div>
+        <div th:if="${success != null}"
+             style="display: block; margin-left:auto; margin-right: auto; background-color: olivedrab; color: wheat; width: 320px; padding-left: unset" class="alertClass">
+            <label>Successfully saved</label>
+        </div>
+        <form sec:authorize="!anonymous" th:method="put" action="/user/update" th:action="@{/user/update}">
+            <div style="display: block; margin-left:auto; margin-right: auto; margin-top: 5px; width: 320px; height: 90px; padding: unset"
+                 class="alertClass"><label
+                    style="top: 5px">Change username</label>
+                <input style="margin: unset; border-color: #72564d; color: #72564d" class="inputClass" type="text"
+                       name="username"
+                       th:value="${currentUser.name}"
+                       th:placeholder="${currentUser.name}">
+            </div>
+            <div style="display: block; margin-left:auto; margin-right: auto; margin-top: 5px; width: 320px; height: 90px; padding: unset"
+                 class="alertClass"><label style="top: 5px">Change password</label>
+                <input style="margin: unset; border-color: #72564d; color: #72564d" class="inputClass" type="password"
+                       name="password" placeholder="*****">
+            </div>
+            <div style="display: block; margin-left:auto; margin-right: auto; margin-top: 5px; width: 320px; height: 90px;  padding: unset"
+                 class="alertClass"><label style="top: 5px">Set
+                your status</label>
+                <input style="margin: unset; border-color: #72564d; color: #72564d" class="inputClass " type="text" name="userStatus"
+                       th:value="${currentUser.status}"
+                       th:placeholder="${currentUser.status}">
+            </div>
+            <button class="buttonClass" style="display: block; margin-left:auto; margin-right: auto; width: 320px" type="submit">Accept changes</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
+

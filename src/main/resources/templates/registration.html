@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up</title>
+    <link rel="stylesheet" type="text/css" href="/main.css">
+</head>
+<body>
+<div style = "margin-left: 38%; margin-top: 100px">
+    <form method="post" action="/user/perform_registration" th:action="@{/user/perform_registration}">
+        <div class="alertClass" style="background-color: lightcoral" th:if="${not_unique_name != null}"><label>User with this name is
+            already exist</label></div>
+        <br>
+        <input class="inputClass" type="text" placeholder="Username" name="username" autofocus required th:modelAttribute="${username}">
+        <br>
+        <input class="inputClass" type="password" placeholder="Password" name="password" required th:modelAttribute="${password}">
+        <br>
+        <button class="buttonClass" style="background-color: gray; color: white" type="submit">Sign up</button>
+    </form>
+</div>
+</body>
+</html>
